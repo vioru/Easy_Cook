@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600|Open+Sans" rel="stylesheet">
+    <title>Vista Administrador</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-ligth  easy_color_nav" >
+        <div class="container-fluid">
+            <p></p>
+            <h1 class="text-white">Easy Cook</h1>
+            <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+
+        </div>
+    </nav>
+
+    <div class="container">
+                
+                
+        
+            <div class="row">
+                
+                <h4>Bienvenid@ {{user.first_name}}</h4>
+                <h5>Rol : Administrador</h5>
+                <div class="d-flex">
+                    <img src=" ../static/img/logo.png" class="avatar" alt="">
+                    <h1>Easy cook</h1>
+                    
+                </div>
+
+                <div class="col-3">
+                    <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        
+                        <button class="nav-link active" id="v-pills-profile-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false">Publicaciones programadas</button>
+                        <button class="nav-link" id="v-pills-messages-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-messages" aria-selected="false">Registro de actividades</button>
+                        <button class="nav-link" id="v-pills-settings-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false">Reglas de Easy Cook</button>
+                        <button class="nav-link" id="v-pills-report-tab" data-bs-toggle="pill" data-bs-target="#v-pills-report" type="button" role="tab" aria-controls="v-pills-report" aria-selected="false">Contenido Reportado</button>
+                    </div>
+                </div> 
+                
+                <div class="col-8">
+
+
+                    <div class="tab-content" id="v-pills-tabContent">
+                            
+                                <div class="tab-pane fade show active" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab" tabindex="0">
+                                    <img src="../static/img/programadas.jpg" class="admi_home"/>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab" tabindex="0">
+                                    <img src="../static/img/registro.png" class="admi_home"/>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab" tabindex="0">
+                                    <img src="../static/img/reglas.png" class="admi_home"/>
+                                </div>
+                                <div class="tab-pane fade" id="v-pills-report" role="tabpanel" aria-labelledby="v-pills-report-tab" tabindex="0">
+                                    <img src="../static/img/reportado.png" class="admi_home"/>
+                                </div>
+                            </div>
+                    </div>
+                    
+                    
+        
+                <div class="col-3 row text-white">
+                    <div class="btn-group" role="group">
+                        <button type="button" id="easy_color" class="btn text-white dropdown-toggle m-2 mt-4" data-bs-toggle="dropdown" aria-expanded="false">
+                            ADMINISTRAR RECETAS
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/Creceta">Crear Receta</a></li>
+                            <li><a class="dropdown-item" href="/view_recipes">Ver recetas</a></li>
+                        </ul>
+                    </div>
+                    <div class="btn-group s-m" role="group">
+                        <button type="button" id="easy_color" class="btn text-white dropdown-toggle m-2 mt-4" data-bs-toggle="dropdown" aria-expanded="false">
+                            ADMINISTRAR INGREDIENTES
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/create_ingredients">Crear Ingrediente</a></li>
+                            <li><a class="dropdown-item " href="/view/ingredients">Ver Ingredientes</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="btn-group" role="group">
+                        <button id="easy_color" type="button" class="btn text-white dropdown-toggle m-2 mt-4" data-bs-toggle="dropdown" aria-expanded="false">
+                            ADMINISTRAR CATEGORIAS
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item " href="/create/category">Crear Categoria</a></li>
+                            <li><a class="dropdown-item " href="/view/category">Ver Categoria</a></li>
+                        </ul>
+                    </div>
+
+
+
+                    </div>
+                </div>
+            
+
+</div>
+    
+
+
+
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
+</body>
+</html>

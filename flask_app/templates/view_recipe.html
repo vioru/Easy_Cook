@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Receta</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-ligth easy_color_nav ">
+        <div class="container-fluid">
+            <p></p>
+            <h1 class="text-white">Easy Cook</h1>
+            <button class="navbar-toggler btn_white" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
+                <span class="navbar-toggler-icon "></span>
+            </button>
+            <div class="offcanvas offcanvas-end " tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header pattern">
+                    <div class="box_logo">
+                        <img src="../static/img/easy.jpg" width="100px" height="70px" class=" mx-4  " />
+                    </div>
+                    <h4 class="offcanvas-title" id="offcanvasNavbarLabel">{{user.last_name +' '+ user.first_name}}
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+
+                        <li class="nav-item">
+
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Subir foto de perfil
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <form action="/upload/logo/user" method="POST" enctype="multipart/form-data">
+                                        <div class="form-group">
+                                            <input type="file" id="uploadprofile" name="uploadprofile"
+                                                accept=".jpg,.png">
+                                            <input type="submit" value="Subir foto" class="btn btn_form mt-3">
+                                        </div>
+
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <div class=" mx-2 row">
+                        <a href="/searchRecipes" class="btn  mt-3 col-7" id="easy_color">Ver mi nevera</a>
+                        <a class=" btn btn-danger  text-black mt-3 col-7" id="easy_color2" href="/dashboard/0">Inicio</a>
+                        <a class=" btn btn-danger mt-3 col-7" href="/logout">Cerrar Sesión</a>
+                    </div>
+                </div>
+                <a class=" btn btn-danger mx-5" href="/deleteuser/{{user.id}}">Eliminar cuenta</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-9 mt-3">
+                <div class="card mb-3" style="max-width: 800px;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img src="{{ recipe.img}}" class="img-fluid rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8 ">
+                                <div class="card-body ">
+                                    <h5 class="card-title"><b>{{recipe.name}}</b></h5>
+                                    <p class="card-text">Tiempo de cocción: </p>{{recipe.time_cook}}min
+                                    <p class="card-text">Descripción: </p>{{recipe.description}}
+                                    <p class="card-text">Preparación:</p> {{recipe.preparation}}<br>
+                                    <p >Ingredientes</p>
+                                    <div class="list_ingre">
+                                    {% for ingredient in recipe.ingrediente%}
+                                    {% if ingredient == '' %}
+                                    <p>Lo sentimos a esta receta está incompleta le faltan los ingredientes </p>
+                                    {% else %}
+                                    <div class="one_ingre">
+                                    <img  class=""  src="../static/img/mercado/{{ingredient.icon}}" width="25px" alt="ing">
+                                    <p class=""> </p>* {{ingredient.name}}
+                                    </div>
+                                    {% endif %}
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <h4 class="mt-3">Mira las Reseñas de esta receta</h4>
+                    {% for reseña in reseñas %}
+                    {% if reseña.recipe_id == recipe.id %}
+                        <div class="reseña col-5 mt-5">
+                            
+                            <h5>Publicada por: USUARIO {{reseña.user_id}}</h5>
+                            <h6>Reseña:</h6>
+                            <textarea disabled rows="3" cols="30">{{reseña.contenido}}</textarea>
+                            <h6>Puntuacion:</h6>
+                            <h6>{{reseña.rate}}</h6>
+                            {% if reseña.user_id == user.id %}
+                            <a href="/edit/reseña/{{reseña.id}}/{{recipe.id}}" class="btn btn-primary">Editar</a>
+                            <a href="/delete/reseña/{{reseña.id}}/{{recipe.id}}" class="btn btn-danger">Borrar</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                    {% endfor %}
+                </div>
+
+
+            </div>
+
+
+        
+
+            <div class="col-3 mt-3">
+                <form action="/create/reseña" method="post">
+                    <input type="hidden" value="{{user.id}}" name="user_id">
+                    <input type="hidden" value="{{recipe.id}}" name="recipe_id">
+                    <div class="form-group">
+                        <label for="content"><b>Deja tus comentarios/reseñas de la receta</b></label>
+                        {% with messages = get_flashed_messages(category_filter=['reseña']) %}
+                        {% if messages %}
+
+                        <div class="alert alert-danger">
+                            {% for message in messages %}
+                            <p>{{message}}</p>
+                            {% endfor %}
+                        </div>
+
+                        {% endif %}
+                        {% endwith %}
+                        <textarea class="form-control" name="contenido" id="contenido" cols="30" rows="5"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="Score">Puntuacion: </label>
+                        <select name="rate" id="rate">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <input type="submit" value="Crear" class="btn btn-success">
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>

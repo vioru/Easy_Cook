@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+    
+    <nav class="navbar navbar-ligth  easy_color " >
+        <div class="container-fluid">
+            <p></p>
+            <h1 class="text-white">Easy Cook</h1>
+
+            <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+            
+        </div>
+    </nav>
+
+
+
+    <div class="container">
+
+        <div class="row">
+
+            <h1 class="text-center col-10">Tus Categorias!!</h1>
+
+            <div class="col-7">
+            
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Nombre</th>
+                                            <th>Acciones </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for category in categories%}
+                                        <tr>
+                                            <td><img src="../static/img/icon_category/{{category.icon}}" width="50px" alt="{{category.name}}"/></td>
+                                            <td>{{category.name}}</td>
+                                            <td>
+                                                <a href="/edit_categories/{{category.id}}" class="btn btn-warning">Editar</a>
+                                                <a href="/delete_categories/{{category.id}}" class="btn btn-danger">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+            </div>
+
+            <div class="col-3 text-end">
+                <a href="/create/category" class="btn btn-success mt-3">Crear nueva categoria</a>
+                <a href="/dashboard/0" class="btn btn-primary mt-3">Inicio</a>
+                
+            </div>
+            
+
+
+
+        </div>
+
+        
+
+
+    </div>
+
+
+
+    <script>
+
+        // activar tooltip (el de los botones agregar al carrito y favs)
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
+        // activar popover (el de la descripción larga del producto)
+        const popoverTriggerList = document.querySelectorAll('[data-bs-toggle="popover"]')
+        const popoverList = [...popoverTriggerList].map(popoverTriggerEl => new bootstrap.Popover(popoverTriggerEl))
+    </script>
+
+</body>
+</html>

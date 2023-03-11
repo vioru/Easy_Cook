@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ingredientes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/style.css') }}">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+<body>
+    <nav class="navbar navbar-ligth  easy_color_nav " >
+        <div class="container-fluid">
+            <p></p>
+            <h1 class="text-white">Easy Cook</h1>
+
+            <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+            
+        </div>
+    </nav>
+
+
+
+    <div class="container mt-3">
+
+        <div class="row ">
+            <h1>Ingresa nuevos ingredientes para tus recetas</h1>
+
+            <div class=" col-6 border p-5 mt-5">
+
+                <form action="/save_ingredients" method="post" class=" ">
+
+
+                    <div class="form-group">
+                        <label for="name" class="form-label">Nombre de ingrediente:</label>
+                        <input type="text" class="form-control" id="name" name="name">
+
+                    </div>
+
+                    <input type="submit" value="crear" class="btn btn-success mt-2 col-5">
+                </form>
+            </div>
+
+            <div class="col-6 text-dark text-end mt-5">
+                <a class="btn btn-primary col-7 text-dark my-2" href="/view/ingredients" id="easy_color">Ver Ingredientes</a>
+                
+                <a href="/dashboard/0" class="btn btn-primary text-dark col-7" id="easy_color2">Inicio</a>
+                
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+</html>
